@@ -15,7 +15,7 @@ function CookieBanner() {
         <section className={`${open ? "visible" : "hidden"} w-full h-14 bg-kryptokurz-cookie-banner text-xs text-white p-4 flex items-center justify-between`}>
             <p>
                 Táto webová stránka používa súbory cookie, aby ste pri jej návšteve mali čo najlepší zážitok.
-                Pre viac informácií si prečítajte naše <a href="/gdp" className="underline text-gray-400 ml-1">zásady ochrany osobných údajov</a>.
+                Pre viac informácií si prečítajte naše <a href="/gdpr" className="underline text-gray-400 ml-1">zásady ochrany osobných údajov</a>.
                 Ak si želáte akceptovať použitie nepodstatných súborov cookie, kliknite na tlačidlo "Súhlasím"
             </p>
             <section className="mr-4 [&>button]:mx-1">
