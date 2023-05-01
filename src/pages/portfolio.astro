@@ -16,12 +16,7 @@ import Layout from "../layouts/Layout.astro";
         class="text-white text-center font-semibold text-4xl tracking-wide mb-4"
         >Portfólio</span
       >
-      <span class="text-white text-center text-xl tracking-wide mb-6"
-        >Aktualizované 4/2023</span
-      >
-      <!-- <span class="text-white">{formattedData.length}</span> -->
     </section>
-
     <!-- Line Chart (vklady/vybery) -->
     <article
       class="flex flex-col w-full min-h-screen items-center justify-center"
@@ -34,11 +29,11 @@ import Layout from "../layouts/Layout.astro";
         <canvas id="yearly_pnl"></canvas>
       </section>
       <section
-        class="flex justify-center items-center w-full h-[530px] md:w-1/2 mb-4"
+        class="flex justify-center items-center w-[620px] lg:my-4 overflow-hidden"
       >
         <iframe
           id="allocation_pie"
-          class="min-w-[420px] h-1/2 overflow-visible"
+          class="w-full h-[350px]"
           src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ__yW0cSeav91GNi3iZhen0l4oKvjW_LyHJYLWAZ4VrclRtKPmz5wo3PmHuMNSrziFtjSNsgBmcJi/pubchart?oid=36621024&format=image"
         ></iframe>
       </section>
@@ -53,9 +48,9 @@ import Layout from "../layouts/Layout.astro";
     overflow-x: hidden;
   }
   #allocation_pie {
-    transform: scale(1.4);
-    @media (max-width:1024px){
-      transform:scale(0.9);
+    transform: scale(1);
+    @media (max-width: 1024px) {
+      transform: scale(0.6);
     }
     /* transform: scale(0.85); */
   }
