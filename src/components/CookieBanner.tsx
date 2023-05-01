@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 function CookieBanner() {
     const [open, setOpen] = useState(false);
     useEffect(() => {
-        // check if previously acknowledged
         const prev = localStorage.getItem("cookie_ack");
         if (prev) {
             setOpen(!Boolean(prev));
