@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         "kryptokurz-background": "rgb(33,33,33)",
         "kryptokurz-gray": "rgb(120,120,120)",
+        "kryptokurz-green": "#2A7E2E",
         "kryptokurz-cookie-banner": "rgb(20,27,33)",
       },
     },

@@ -1,7 +1,20 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import CenteredContentLayout from "../layouts/CenteredContentLayout.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Slovník">
-	
+  <CenteredContentLayout>
+    <section class="flex flex-col items-center justify-center">
+      <span class="text-3xl text-white py-10"> Krypto Slovník</span>
+      <span class="text-lg text-white py-6"
+        >Dostupný na stiahnutie ako súbor PDF</span
+      >
+      <a
+        class="bg-kryptokurz-green hover:bg-green-600 text-white rounded py-2 px-6 w-28 text-center"
+        href="/share/Krypto Kurz Osnova.pdf"
+        download="Krypto Kurz Osnova">Stiahnuť</a
+      >
+    </section>
+  </CenteredContentLayout>
 </Layout>

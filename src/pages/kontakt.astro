@@ -1,7 +1,39 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import CenteredContentLayout from "../layouts/CenteredContentLayout.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Kontakt">
-	
+  <CenteredContentLayout>
+    <div class="flex flex-col justify-center items-center p-4">
+      <span class="text-kryptokurz-gray text-xl">Zakladateľ</span>
+      <span class="text-white text-4xl font-semibold">Sebastián</span>
+      <img src="/kontakt/sebastian-mackay.png" class="h-96 my-10" />
+      <span class="text-white text-2xl">Krypto Coach</span>
+      <p class="text-gray-200 text-md text-center w-full lg:w-1/4">
+        Mojim cieľom je ponúkať vzdelanie o Krypte a hlavne DeFi obyčajným ľudom
+        a priniesť na slovenský trh vzdelania niečo čo tu ešte nie je. Toto nie
+        je len ďalší kurz o tom čo je to Bitcoin a ako ho nakúpiť, na to
+        existujú iné kurzy, ktoré ani nie sú potrebné, pretože je toho aj plný
+        YouTube, ktorý je úplne zadarmo. Prinášam Vám všetko čo som sa naučil,
+        nie len základy, ale aj pokročilé investičné stratégie, ktoré vo svete
+        tradičného investovania buď neexistujú, alebo sú dostupné len vybraným
+        ľudom. Veľa informácií ktoré v mojom kurze ponúkam nenájdete v
+        slovenčine vôbec, preto je tento kurz extra výhodný pre ľudí ktorí
+        nevedia plynule po anglicky. Naučím Vás všetko od základov napríklad ako
+        funguje Bitcoin, ako nakúpiť svoje prvé krypto, až po to ako funguje LP,
+        likviditný staking, syntetiká, krypto pôžičky a veľa dalších finančných
+        produtkov a služieb, za účelom maximalizácie zisku pričom je bezpečnosť
+        Vaších investícií vždy moja priorita. Toto nie je kurz o tradovaní, ale
+        o investovaní, no určité prvky tradovania prejdeme tiež.
+      </p>
+      <section class="text-md text-kryptokurz-gray text-center py-4 mt-10">
+        <p>Fortunáta Mackay - FOMA</p>
+
+        <p>IČO 40791726</p>
+        <p>DIČ 1076842195</p>
+        <p>Email: sebastian@kryptokurz.sk</p>
+      </section>
+    </div>
+  </CenteredContentLayout>
 </Layout>

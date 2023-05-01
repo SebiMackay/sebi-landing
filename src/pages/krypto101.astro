@@ -1,7 +1,428 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import CenteredContentLayout from "../layouts/CenteredContentLayout.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Krypto 101">
-	
+  <CenteredContentLayout>
+    <span class="text-4xl text-white font-semibold py-4">Krypto 101</span>
+    <span class="text-base lg:text-lg font-semibold text-white py-4"
+      >základné tipy pre nových krypto investorov</span
+    >
+    <article
+      class="w-full lg:w-3/4 flex justify-center flex-wrap gap-2 gap-y-10"
+    >
+      <!-- key -->
+      <section
+        class="w-full lg:w-[400px] mx-4 flex [&>svg]:text-kryptokurz-green [&>svg]:w-14 [&>svg]:h-14"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
+          ><path
+            data-name="layer1"
+            d="M56.7 7.3a18 18 0 00-28.7 21l-8 7.9V40h-6v6H8v6H4l-2 2v8h8l25.8-26A18 18 0 0056.7 7.3zm-5.9 11.5a4 4 0 110-5.7 4 4 0 010 5.7z"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path>
+        </svg>
+        <div
+          class="w-full lg:w-[400px] ml-4 [&>p]:text-white [&>span]:text-kryptokurz-gray"
+        >
+          <p class="text-xl mb-3">"Not your keys, not your coins"</p>
+          <span class="text-md font-semibold">
+            V preklade "Nie tvoje kľúče, nie tvoje mince". Ak nevlastníš
+            súkromný kľúč, alebo seed od peňaženky v ktorej je tvoje krypto, tak
+            nie je tvoje. V krypte je najbezpečnejšie držať svoje krypto vo
+            svojej vlastnej peňaženke, od ktorej máš kľúč iba ty. Ten kto má
+            kľúč od peňaženky, má prístup ku všetkému v nej.<br /><br /> NIKDY NEZDIEĽAJ
+            SVOJE SÚKROMNÉ KĽÚČE!!
+          </span>
+        </div>
+      </section>
+      <!-- is not a bank -->
+      <section
+        class="w-full lg:w-[400px] mx-4 flex [&>svg]:text-kryptokurz-green [&>svg]:w-14 [&>svg]:h-14"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
+          ><path
+            data-name="layer2"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            d="M32 16v40m-10 0h20M28 12H12L2 32"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path><circle
+            data-name="layer2"
+            cx="32"
+            cy="12"
+            r="4"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"></circle><path
+            data-name="layer2"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            d="M12 12l10 20m14-20h16l10 20M52 12L42 32"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path><path
+            data-name="layer1"
+            d="M12 42a10 10 0 0010-10H2a10 10 0 0010 10zm40 0a10 10 0 01-10-10h20a10 10 0 01-10 10z"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path>
+        </svg>
+        <div
+          class="w-full lg:w-[400px] ml-4 [&>p]:text-white [&>span]:text-kryptokurz-gray"
+        >
+          <p class="text-xl mb-3">"An exchange is not a bank"</p>
+          <span class="text-md font-semibold">
+            V preklade "Burza nie je banka". Burza je na obchodovanie, nie na
+            držanie tvojich aktív. Kúp/predaj čo chceš a čo si chceš nechať,
+            vyber do svojej vlastnej peňaženky. Toto priamo nadväzuje na "Not
+            your keys, not your coins", pretože od peňaženky na burze nemáš
+            súkromný kľúč.
+          </span>
+        </div>
+      </section>
+      <!--time is market-->
+      <section
+        class="w-full lg:w-[400px] mx-4 flex [&>svg]:text-kryptokurz-green [&>svg]:w-14 [&>svg]:h-14"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
+          ><circle
+            data-name="layer2"
+            cx="32"
+            cy="32"
+            r="30"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"></circle><path
+            data-name="layer1"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            d="M32 10v23l13 7"
+            stroke-linejoin="round"></path>
+        </svg>
+        <div
+          class="w-full lg:w-[400px] ml-4 [&>p]:text-white [&>span]:text-kryptokurz-gray"
+        >
+          <p class="text-xl mb-3">
+            "Time in the market, beats timing the market"
+          </p>
+          <span class="text-md font-semibold">
+            V preklade "Čas na trhu porazí časovanie trhu". Toto je referencia
+            na "DCA" - Dollar Cost Averaging. DCA znamená pravidelne investovať
+            bez ohľadu na cenu a potenciálnu stratu (napr. x€/mesiac), čo je
+            štatisticky najefektívnejšia tradičná investičná stratégia. Ak
+            investuješ pravidelne, tak dlhodobo budeš mať viac ako ten kto sa
+            snaží načasovať spodok trhu a nakúpiť čo najlacnejšie.
+          </span>
+        </div>
+      </section>
+      <!--be fearful-->
+      <section
+        class="w-full lg:w-[400px] mx-4 flex [&>svg]:text-kryptokurz-green [&>svg]:w-14 [&>svg]:h-14"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
+          ><path
+            data-name="layer2"
+            d="M20 3.643A4.747 4.747 0 0124 8m-13.176 3c7.037 1.707 5.187 8.049 5.187 8.049M13 23s.187-5 6-4M4.139 32.807C7.947 27.341 16 28.464 18 35.464M13 39c2-4 7-5 10-1m-4-11c3.263 0 7 2 7 7m6-8c-3-1-6.847-.31-8.192 2.7M24 13c3 1 4 6 2 9m6-4a6.387 6.387 0 00-4.959-.125M7.813 51c4.035-.225 7.354-3.744 7.354-6.729M10 44c5-1 7.456.754 8 4m10.179-1.188c-7-1-11.827 8.442-5.388 14.709M24 41c4 1 6 7 2 11m-5.673-41.586A4 4 0 0127 9.356"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"></path><path
+            data-name="layer1"
+            d="M44 3.643A4.747 4.747 0 0040 8m13.176 3c-7.037 1.707-5.187 8.049-5.187 8.049M51 23s-.187-5-6-4m14.861 13.807C56.053 27.341 48 28.464 46 35.464M51 39c-2-4-7-5-10-1m4-11c-3.263 0-7 2-7 7m-6-8c3-1 6.847-.31 8.192 2.7M40 13c-3 1-4 6-2 9m-6-4a6.387 6.387 0 014.959-.125M56.188 51c-4.035-.225-7.354-3.744-7.354-6.729M54 44c-5-1-7.456.754-8 4m-10.179-1.188c7-1 11.827 8.442 5.388 14.709M40 41c-4 1-6 7-2 11m5.673-41.586A4 4 0 0037 9.356"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"></path><path
+            data-name="layer2"
+            d="M32 3.874a.24.24 0 01-.171-.073C31.2 3.166 28.716 1.321 22 3 13.949 5.013 4 14.548 4 36s16.5 26 22 26c4.032 0 5.378-1.077 5.808-1.65a.239.239 0 01.192-.1"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"></path><path
+            data-name="layer1"
+            d="M42 3c-6.716-1.679-9.2.166-9.829.8a.24.24 0 01-.171.074v56.38a.239.239 0 01.192.1C32.622 60.923 33.968 62 38 62c5.5 0 22-4.548 22-26S50.051 5.013 42 3z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"></path>
+        </svg>
+        <div
+          class="w-full lg:w-[400px] ml-4 [&>p]:text-white [&>span]:text-kryptokurz-gray"
+        >
+          <p class="text-xl mb-3">
+            "Be fearful when others are greedy, and greedy when others are
+            fearful"
+          </p>
+          <span class="text-md font-semibold">
+            ~ Warren Buffett<br /> V preklade "Boj sa keď sú ľudia lakomí, a buď
+            lakomý keď sa ľudia boja". Jeden zo znamení že je thrový cyklus pri konci
+            je správanie sa investorov. Ak ide trh už dlho hore a ľudia sú lakomí,
+            chcú sa nabaliť ešte viac, berú pôžičky a pákujú, tak sa boj a ber zisky,
+            pretože sme pravdepodobne na vrchu. Ak ide trh už dlho dole a ľudia sú
+            zúfalí a kapitulujú vo veľkej strate z beznádeje, tak buď lakomý, pretože
+            sme pravdepodobne na spodku trhu
+          </span>
+        </div>
+      </section>
+      <!--yield-->
+      <section
+        class="w-full lg:w-[400px] mx-4 flex [&>svg]:text-kryptokurz-green [&>svg]:w-14 [&>svg]:h-14"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
+          ><circle
+            data-name="layer2"
+            cx="21"
+            cy="23"
+            r="5"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"></circle><circle
+            data-name="layer2"
+            cx="43"
+            cy="41"
+            r="5"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"></circle><path
+            data-name="layer2"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            d="M46 18L18 46"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path><path
+            data-name="layer1"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            d="M32 4.5L38 2l4.5 4.6H49l2.5 5.9 5.9 2.5v6.5L62 26l-2.5 6 2.5 6-4.6 4.5V49l-5.9 2.5-2.5 5.9h-6.5L38 62l-6-2.5-6 2.5-4.5-4.6H15l-2.5-5.9L6.6 49v-6.5L2 38l2.5-6L2 26l4.6-4.5V15l5.9-2.5L15 6.6h6.5L26 2l6 2.5z"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path>
+        </svg>
+        <div
+          class="w-full lg:w-[400px] ml-4 [&>p]:text-white [&>span]:text-kryptokurz-gray"
+        >
+          <p class="text-xl mb-3">
+            "If you don't know where the yield comes from, you are the yield"
+          </p>
+          <span class="text-md font-semibold">
+            V preklade "Ak nevieš odkiaľ pochádza tvoj výnos, tak ty si ten
+            výnos". Jednoduchý spôsob ako identifikovať pyramidovú hru/ponzi
+            schému a vyhnúť sa jej. Ak nevieš odkiaľ pochádza tvoj zisk, tak
+            pravdepodobne pochádza od investorov ako si ty, ktorí sa do toho
+            projektu dostali pred tebou. DYOR!
+          </span>
+        </div>
+      </section>
+      <!--risk-->
+      <section
+        class="w-full lg:w-[400px] mx-4 flex [&>svg]:text-kryptokurz-green [&>svg]:w-14 [&>svg]:h-14"
+      >
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"
+          ><path
+            d="M32 8L4 58h56L32 8z"
+            stroke-width="2"
+            stroke-miterlimit="10"
+            stroke-linecap="round"
+            stroke="currentColor"
+            fill="none"
+            data-name="layer2"
+            stroke-linejoin="round"></path><path
+            d="M32 41V25m-1.5 22"
+            stroke-width="2"
+            stroke-miterlimit="10"
+            stroke-linecap="round"
+            stroke="currentColor"
+            fill="none"
+            data-name="layer1"
+            stroke-linejoin="round"></path><circle
+            stroke-width="2"
+            stroke-miterlimit="10"
+            stroke-linecap="round"
+            stroke="currentColor"
+            fill="none"
+            r="2"
+            cy="48"
+            cx="32"
+            data-name="layer1"
+            stroke-linejoin="round"></circle>
+        </svg>
+        <div
+          class="w-full lg:w-[400px] ml-4 [&>p]:text-white [&>span]:text-kryptokurz-gray"
+        >
+          <p class="text-xl mb-3">
+            Potenciálny zisk/strata sú priamo úmerné riziku
+          </p>
+          <span class="text-md font-semibold">
+            Čim je riskantnejšia potenciálna investícia, tým je aj výšší
+            potenciálny zisk, ale aj strata. Investície, ktoré ponúkajú stovky
+            percent v úrokoch, ich ponúkajú práve, aby offsetli vysoké riziko
+            investície.
+          </span>
+        </div>
+      </section>
+      <!--today-->
+      <section
+        class="w-full lg:w-[400px] mx-4 flex [&>svg]:text-kryptokurz-green [&>svg]:w-14 [&>svg]:h-14"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
+          ><circle
+            data-name="layer2"
+            cx="32"
+            cy="32"
+            r="30"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"></circle><path
+            data-name="layer1"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            d="M32 10v23l13 7"
+            stroke-linejoin="round"></path>
+        </svg>
+        <div
+          class="w-full lg:w-[400px] ml-4 [&>p]:text-white [&>span]:text-kryptokurz-gray"
+        >
+          <p class="text-xl mb-3">
+            "The best time to start investing was yesterday. The second best?
+            Today"
+          </p>
+          <span class="text-md font-semibold">
+            V preklade "Najlepší čas na začatie investovania bol včera. Druhý
+            najlepší? Dnes". Nikdy nie je neskoro ani priskoro začať investovať.
+            Ale treba začať a neodkladať to.
+          </span>
+        </div>
+      </section>
+      <!--wind-->
+      <section
+        class="w-full lg:w-[400px] mx-4 flex [&>svg]:text-kryptokurz-green [&>svg]:w-14 [&>svg]:h-14"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
+          ><path
+            data-name="layer2"
+            d="M34 7a10 10 0 0110 10 10 10 0 01-10 10H8a6 6 0 00-6 6 6 6 0 006 6h24a8 8 0 018 8 8 8 0 01-8 8"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path><path
+            data-name="layer2"
+            d="M26 11a4 4 0 014 4 4 4 0 01-4 4H14"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path><path
+            data-name="layer1"
+            d="M50 15a8 8 0 018 8 8 8 0 01-8 8h-6m12 20a6 6 0 006-6 6 6 0 00-6-6H44"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path>
+        </svg>
+        <div
+          class="w-full lg:w-[400px] ml-4 [&>p]:text-white [&>span]:text-kryptokurz-gray"
+        >
+          <p class="text-xl mb-3">
+            "It's better to be roughly right, than precisely wrong"
+          </p>
+          <span class="text-md font-semibold">
+            V preklade "Je lepšie mať zhruba pravdu, ako sa presne mýliť".
+            Diverzifikácia portfólia investorovi pomôže pretrvať trhovú
+            volatilitu.
+          </span>
+        </div>
+      </section>
+      <!--money-->
+      <section
+        class="w-full lg:w-[400px] mx-4 flex [&>svg]:text-kryptokurz-green [&>svg]:w-14 [&>svg]:h-14"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
+          ><path
+            data-name="layer2"
+            d="M38 18s18 14 18 34a10 10 0 01-10 10H18A10 10 0 018 52c0-20 18-34 18-34S14 7.6 14 4s8 2 12 2c5.7 0 6.3-4 10-4s4.1 4.1 10 4.1c2.3 0-2 6-8 11.9z"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path><path
+            data-name="layer2"
+            d="M26 18h13a19.2 19.2 0 0013-4m-2 8a6.5 6.5 0 016 3"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path><path
+            data-name="layer1"
+            d="M37.9 34a6 6 0 00-5.9-5c-3.3 0-6 2.2-6 5.5s3 4.8 6 5.5m-6 5a6 6 0 006 6c3.3 0 6-2.2 6-5.5s-3-4.8-6-5.5m0-11v-3m0 28v-3"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            stroke-linejoin="round"
+            stroke-linecap="round"></path>
+        </svg>
+        <div
+          class="w-full lg:w-[400px] ml-4 [&>p]:text-white [&>span]:text-kryptokurz-gray"
+        >
+          <p class="text-xl mb-3">
+            "Price is what you pay, value is what you get"
+          </p>
+          <span class="text-md font-semibold">
+            V preklade "Cena je to čo zaplatíš, hodnota je to čo dostaneš"
+          </span>
+        </div>
+      </section>
+    </article>
+  </CenteredContentLayout>
 </Layout>

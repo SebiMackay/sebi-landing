@@ -33,12 +33,15 @@ import Layout from "../layouts/Layout.astro";
       <section class="w-full md:w-1/2 h-96 mb-4">
         <canvas id="yearly_pnl"></canvas>
       </section>
-
-      <iframe
-        width="966"
-        height="426"
-        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ__yW0cSeav91GNi3iZhen0l4oKvjW_LyHJYLWAZ4VrclRtKPmz5wo3PmHuMNSrziFtjSNsgBmcJi/pubchart?oid=36621024&format=image"
-      ></iframe>
+      <section
+        class="flex justify-center items-center w-full h-[530px] md:w-1/2 mb-4"
+      >
+        <iframe
+          id="allocation_pie"
+          class="min-w-[420px] h-1/2 overflow-visible"
+          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ__yW0cSeav91GNi3iZhen0l4oKvjW_LyHJYLWAZ4VrclRtKPmz5wo3PmHuMNSrziFtjSNsgBmcJi/pubchart?oid=36621024&format=image"
+        ></iframe>
+      </section>
     </article>
   </main>
 </Layout>
@@ -48,6 +51,13 @@ import Layout from "../layouts/Layout.astro";
   main {
     background-color: rgb(33, 33, 33);
     overflow-x: hidden;
+  }
+  #allocation_pie {
+    transform: scale(1.4);
+    @media (max-width:1024px){
+      transform:scale(0.9);
+    }
+    /* transform: scale(0.85); */
   }
 </style>
 

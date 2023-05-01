@@ -1,7 +1,98 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import ToolsPanel from "../components/ToolsPanel";
+import CenteredContentLayout from "../layouts/CenteredContentLayout.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Nástroje">
-	
+  <CenteredContentLayout>
+    <span class="text-center text-white text-4xl my-10">Nástroje</span>
+    <div class="w-full flex-wrap flex justify-center items-start gap-4">
+      <ToolsPanel
+        title="Dátové Agregátory"
+        tools={[
+          {
+            img: "/nastroje/coingecko-logo.svg",
+            name: "Coingecko",
+            description:
+              "CoinGecko poskytuje zásadnú analýzu krypto trhu. Okrem sledovania cien, objemu a trhovej kapitalizácie CoinGecko sleduje rast komunity, vývoj open-source kódu, hlavné udalosti a on-chain metriky.",
+            link: "https://www.coingecko.com/",
+          },
+          {
+            img: "/nastroje/defillama.webp",
+            name: "DefiLlama",
+            description: "DefiLlama je najväčší agregátor TVL pre DeFi...",
+            link: "https://defillama.com/",
+          },
+          {
+            img: "/nastroje/messari-logo.svg",
+            name: "Messari",
+            description: "Messari prináša transparentnosť do kryptoekonomiky.",
+            link: "https://messari.io/",
+          },
+          {
+            img: "/nastroje/cmc.webp",
+            name: "Coin Market Cap",
+            description:
+              "CoinMarketCap je svetovo najreferencovanejšia webová stránka na sledovanie cien kryptoaktív v rýchlo rastúcom kryptomenovom priestore.",
+            link: "https://coinmarketcap.com/",
+          },
+          {
+            img: "/nastroje/airdrops.io.webp",
+            name: "AirDrops.io",
+            description:
+              "Airdrops.io je bezplatný agregátor pre krypto airdropy.",
+            link: "https://airdrops.io/",
+          },
+          {
+            img: "/nastroje/debank-icon.svg",
+            name: "DeBank",
+            description:
+              "Web 3 natívny messenger a najlepší nástroj na sledovanie portfólia, ktorý pokrýva všetky vaše tokeny, DeFi protokoly a NFT na všetkých EVM kompatibílnych chainoch",
+            link: "https://debank.com/",
+          },
+        ]}
+      />
+      <ToolsPanel
+        title="DeFi Nástroje"
+        tools={[
+          {
+            img: "/nastroje/defi-safety.webp",
+            name: "DeFi Safety",
+            description:
+              "DeFiSafety je nezávislá ratingová organizácia, ktorá hodnotí produkty decentralizovaného financovania, aby vytvorila celkové skóre bezpečnosti založené na transparentnosti a dodržiavaní osvedčených postupov.",
+            link: "https://www.defisafety.com/",
+          },
+          {
+            img: "/nastroje/token-sniffer.svg",
+            name: "Token Sniffer",
+            description:
+              "Automatizovaná detekcia podvodov, auditovanie a metriky.",
+            link: "https://tokensniffer.com/",
+          },
+          {
+            img: "/nastroje/aprtoapy-3.webp",
+            name: "APR to APY",
+            description:
+              "Ročná percentuálna miera (APR) a ročný percentuálny výnos (APY) sa môžu zdať podobné, ale poznanie rozdielu a spôsobu ich použitia vám pomôže robiť lepšie finančné rozhodnutia.",
+            link: "https://www.aprtoapy.com/",
+          },
+          {
+            img: "/nastroje/whiteboard-crypto.webp",
+            name: "Kalkulačka Dočasnej Straty",
+            description:
+              "Sme tím blockchainových nadšencov, ktorí sa venujú vytváraniu vysokokvalitných zdrojov pre každého, kto sa chce dozvedieť viac o krypto priestore.",
+            link: "https://whiteboardcrypto.com/impermanent-loss-calculator/",
+          },
+          {
+            img: "/nastroje/moneybag.webp",
+            name: "CryptoFees.info",
+            description:
+              "Existuje veľa krypto projektov.Za ktoré z nich ľudia v skutočnosti platia?",
+            link: "https://cryptofees.info/",
+          },
+        ]}
+      />
+    </div>
+  </CenteredContentLayout>
 </Layout>

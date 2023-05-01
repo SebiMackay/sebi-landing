@@ -1,11 +1,11 @@
 function Footer() {
     return (
-        <footer className="py-10 text-kryptokurz-gray w-full flex items-center justify-center ">
+        <footer className="py-10 px-2 text-kryptokurz-gray w-full flex items-center justify-center ">
 
-            <p className="w-1/2 font-semibold">
+            <p className="font-semibold w-full text-left flex items-center justify-center">
                 © {new Date().getFullYear()}<br />
-                Investovanie do kryptomien  môže viesť k peňažnej strate.
-                Kryptokurz.sk nie je zodpovedný za stratu peňazí a neposkytuje finančné poradenstvo.
+                Investovanie do kryptomien  môže viesť k peňažnej strate.<br />
+                Kryptokurz.sk nie je zodpovedný za stratu peňazí a neposkytuje finančné poradenstvo.<br />
                 Poskytuje vzdelanie a informácie potrebné k vlastnej analýze trhu.
             </p>
         </footer>

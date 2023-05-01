@@ -18,7 +18,7 @@ function CookieBanner() {
                 Pre viac informácií si prečítajte naše <a href="/gdp" className="underline text-gray-400 ml-1">zásady ochrany osobných údajov</a>.
                 Ak si želáte akceptovať použitie nepodstatných súborov cookie, kliknite na tlačidlo "Súhlasím"
             </p>
-            <section className="mr-4 [&>button]:mx-2">
+            <section className="mr-4 [&>button]:mx-1">
                 <button className="border border-white py-1.5 px-4" onClick={() => { setOpen(false); }}>Zamietnuť</button>
                 <button className="border border-white py-1.5 px-4" onClick={() => { setOpen(false); localStorage.setItem("cookie_ack", "true"); }}>Povoliť</button>
             </section>
