@@ -1,0 +1,346 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Portfolio">
+  <main class="w-full h-full md:p-20 py-10">
+    <!-- sebastian mackay (gray)-->
+    <!-- Portfolio (white)-->
+    <!-- Aktualizovane 'datum' (grayer white)-->
+    <section class="flex flex-col mb-5">
+      <span
+        class="text-gray-400 text-center font-semibold text-lg uppercase tracking-wide mb-3"
+        >Sebastián Mackay</span
+      >
+      <span
+        class="text-white text-center font-semibold text-4xl tracking-wide mb-4"
+        >Portfólio</span
+      >
+      <span class="text-white text-center text-xl tracking-wide mb-6"
+        >Aktualizované 4/2023</span
+      >
+      <!-- <span class="text-white">{formattedData.length}</span> -->
+    </section>
+
+    <!-- Line Chart (vklady/vybery) -->
+    <article
+      class="flex flex-col w-full min-h-screen items-center justify-center"
+    >
+      <section class="w-full md:w-1/2 h-96 mb-4">
+        <canvas id="lc" class="w-full h-full"></canvas>
+      </section>
+      <!-- Bar Chart (ročný pnl) -->
+      <section class="w-full md:w-1/2 h-96 mb-4">
+        <canvas id="yearly_pnl"></canvas>
+      </section>
+
+      <iframe
+        width="966"
+        height="426"
+        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ__yW0cSeav91GNi3iZhen0l4oKvjW_LyHJYLWAZ4VrclRtKPmz5wo3PmHuMNSrziFtjSNsgBmcJi/pubchart?oid=36621024&format=image"
+      ></iframe>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  body,
+  main {
+    background-color: rgb(33, 33, 33);
+    overflow-x: hidden;
+  }
+</style>
+
+<script>
+  import axios from "axios";
+  const spreadsheetApiKey = `AIzaSyAlwr2tAqZIG_WrdWC6731xUq_22Reb_xE`;
+  const spreadsheetID = `1-g3HlExS9wSbq5uZdmsU56G_wPZhpJEcymtBfMNlevc`;
+  const valueRenderOption = "FORMATTED_VALUE";
+  const dateTimeRenderOption = "FORMATTED_STRING";
+  type GoogleSheetLinkProps = {
+    key: string;
+    id: string;
+    ranges?: string;
+    renderOption?: string;
+    dateTimeRenderOption?: string;
+  };
+  const generateGoogleSheetAPILink = (props: GoogleSheetLinkProps) => {
+    if (props.ranges) {
+      // return long link for specific row & column
+      return `https://sheets.googleapis.com/v4/spreadsheets/${props.id}/values/${props.ranges}?key=${props.key}&alt=json
+&valueRenderOption=${props.renderOption}&dateTimeRenderOption=${props.dateTimeRenderOption}`;
+    } else {
+      // return shorter link for sheets object
+      return `https://sheets.googleapis.com/v4/spreadsheets/${props.id}?key=${props.key}&alt=json`;
+    }
+  };
+
+  // use these formatted datapoints
+  type ResultValues = {
+    date: string;
+    year: number;
+    value: number;
+    percentageChange: number;
+    added: number;
+    change: number;
+  };
+
+  const dataResults: ResultValues[] = await axios
+    .get(
+      generateGoogleSheetAPILink({
+        id: spreadsheetID,
+        key: spreadsheetApiKey,
+        ranges: "All Time!H2:L63",
+        renderOption: valueRenderOption,
+        dateTimeRenderOption,
+      })
+    )
+    .then((res) => {
+      const data = res.data;
+      const formattedData: ResultValues[] = [];
+      // const title = data.values[0];
+      for (let i = 2; i < data.values.length; i++) {
+        const date = data.values[i][0];
+        const value =
+          data.values[i][1].split("$")[0] + data.values[i][1].split("$")[1];
+        const percentageChange = data.values[i][2].split("%")[0];
+        const added =
+          data.values[i][3].split("$")[0] + data.values[i][3].split("$")[1];
+        const change =
+          data.values[i][4].split("$")[0] + data.values[i][4].split("$")[1];
+        if (date && value) {
+          const year = parseInt(date.split("/")[1]);
+          const fValue = parseFloat(value.replaceAll(",", ""));
+          const fpChange = parseFloat(percentageChange.replaceAll(",", ""));
+          const fAdded = parseFloat(added.replaceAll(",", ""));
+          const fChange = parseFloat(change.replaceAll(",", ""));
+          if (!isNaN(fValue))
+            formattedData.push({
+              date,
+              year,
+              value: fValue,
+              percentageChange: fpChange,
+              change: fAdded,
+              added: fChange,
+            });
+        }
+      }
+      return formattedData as ResultValues[];
+    })
+    .catch((err) => console.log(err.response.data.error));
+  //calculating sliding average per 4 year period for line chart
+  function slidingAverage(arr: number[], windowSize: number): number[] {
+    const result: number[] = [];
+    let sum = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+      sum += arr[i];
+      if (i >= windowSize) {
+        sum -= arr[i - windowSize];
+        result.push(sum / windowSize);
+      }
+    }
+    return result;
+  }
+
+  // Chart rendering
+  import Chart from "chart.js/auto";
+  Chart.defaults.maintainAspectRatio = false;
+  const lineCtx = document.getElementById("lc") as HTMLCanvasElement;
+  const barCtx = document.getElementById("yearly_pnl") as HTMLCanvasElement;
+
+  const lineChart = new Chart(lineCtx, {
+    type: "line",
+    options: {
+      scales: {
+        y: {
+          ticks: {
+            callback: (value, index, ticks) => {
+              return value + "%";
+            },
+          },
+        },
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label(context) {
+              return context.parsed.y.toFixed(2) + "%";
+            },
+          },
+        },
+      },
+    },
+    data: {
+      labels: dataResults.map((result) => result.date),
+      datasets: [
+        {
+          label: "Hodnota",
+          data: dataResults.map((result) => result.value / 10),
+          borderWidth: 2,
+          tension: 0.5,
+          borderColor: "deepskyblue",
+        },
+        {
+          label: "mid",
+          data: dataResults.map((result) => 0),
+          borderWidth: 2,
+          borderColor: "#696969",
+          pointRadius: 0,
+          order: 10,
+        },
+        {
+          label: "4 mesačný kĺzavý priemer",
+          // offset this because it doesnt start on beggining in assignment either
+          data: [
+            null,
+            null,
+            null,
+            ...slidingAverage(
+              dataResults.map((result) => result.value / 10),
+              4
+            ),
+          ],
+          borderWidth: 2,
+          borderColor: "lightgreen",
+          tension: 0.3,
+        },
+        {
+          label: "Vklady/Výbery",
+          data: dataResults.map((result) => result.change / 10),
+          borderWidth: 2,
+          tension: 0.5,
+          borderColor: "crimson",
+        },
+      ],
+    },
+  });
+  lineChart.legend.legendItems.pop();
+  // total value for each year per yearly sheet
+  await axios
+    .get(
+      generateGoogleSheetAPILink({
+        id: spreadsheetID,
+        key: spreadsheetApiKey,
+      })
+    )
+    .then((res) => {
+      const { sheets } = res.data;
+      return sheets;
+    })
+    .catch(console.error);
+
+  const yearValues: string[] = [];
+  dataResults.reduce<string[]>((prev, current) => {
+    if (yearValues.length === 0) {
+      yearValues.push(current.year.toString());
+    } else {
+      if (!yearValues.includes(current.year.toString()) && current.year) {
+        yearValues.push(current.year.toString());
+      }
+    }
+    return yearValues;
+  }, []);
+
+  type NetworthPerYear = {
+    label: string;
+    data: number[] | string[];
+  };
+  const networthResultsPerYear: NetworthPerYear[] = [];
+  const getValuePerYear = async (year: string) => {
+    return await axios
+      .get(
+        generateGoogleSheetAPILink({
+          key: spreadsheetApiKey,
+          id: spreadsheetID,
+          ranges: `${year}!M3:V32`,
+          dateTimeRenderOption,
+          renderOption: valueRenderOption,
+        })
+      )
+      .then((res) => {
+        const { values } = res.data;
+        //[0][0] gross Input
+        //[0][6] output
+        //[27][8] networth
+        const formattedGrossInput = parseFloat(
+          values[0][0].split("$")[0] +
+            values[0][0].split("$")[1].replaceAll(",", "")
+        );
+        const formattedOutput = parseFloat(
+          values[0][6].split("$")[0] +
+            values[0][6].split("$")[1].replaceAll(",", "")
+        );
+
+        const formattedNetWorth = parseFloat(
+          values[27][8].split("$")[0] +
+            values[27][8].split("$")[1].replaceAll(",", "")
+        );
+
+        return {
+          input: formattedGrossInput,
+          output: formattedOutput,
+          networth: formattedNetWorth,
+        };
+      })
+      .catch((err) => console.log(err.response.data.error));
+  };
+
+  // await getValuePerYear(year)
+  const netWorthValues = await Promise.all(
+    yearValues.map(async (year) => {
+      return { year, values: await getValuePerYear(year) };
+    })
+  );
+
+  for (let i = 0; i < netWorthValues.length; i++) {
+    const value: { networth: number; output: number; input: number } =
+      netWorthValues[i].values;
+    const nwYear = netWorthValues[i].year;
+    const resultsForAYear = dataResults.filter(
+      (result) => result.year === parseInt(nwYear)
+    );
+    // const sum: number = resultsForAYear.reduce(
+    //   (a: number, b: ResultValues) => a + b.added,
+    //   0
+    // );
+    if (value.networth && resultsForAYear) {
+      // (networth - output  - input) / input
+      const percentualValue =
+        (value.networth - value.output - value.input) / value.input;
+      // - output / grossInput
+      networthResultsPerYear.push({
+        label: nwYear,
+        data: [(percentualValue * 100).toFixed(2)],
+      });
+    }
+  }
+  // (networth per year - output ) / grossinput
+  new Chart(barCtx, {
+    type: "bar",
+    options: {
+      scales: {
+        y: {
+          ticks: {
+            callback: (value, index, ticks) => {
+              return value + "%";
+            },
+          },
+        },
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (context) => {
+              return ` ${context.raw}%`;
+            },
+          },
+        },
+      },
+    },
+    data: {
+      labels: ["Ročný PnL"],
+      datasets: networthResultsPerYear,
+    },
+  });
+</script>
