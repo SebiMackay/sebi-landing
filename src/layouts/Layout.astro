@@ -1,12 +1,9 @@
 ---
-import CookieBanner from "../components/CookieBanner";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-
 export interface Props {
   title: string;
 }
-
 const { title } = Astro.props;
 ---
 
@@ -35,3 +32,8 @@ const { title } = Astro.props;
     min-height: 100vh;
   }
 </style>
+
+<script>
+  import { inject } from "@vercel/analytics";
+  inject();
+</script>
