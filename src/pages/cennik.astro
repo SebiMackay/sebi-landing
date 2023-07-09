@@ -2,8 +2,9 @@
 import axios from "axios";
 import CenteredContentLayout from "../layouts/CenteredContentLayout.astro";
 import Layout from "../layouts/Layout.astro";
+const timestamp = Date.now();
 const response = await axios.get(
-  `${import.meta.env.PUBLIC_SERVER_URL}/stripe/products`
+  `${import.meta.env.PUBLIC_SERVER_URL}/stripe/products?timestamp=${timestamp}`
 );
 const monthly = response.data.pricing[0].unit_amount / 100;
 const oneTime = response.data.pricing[1].unit_amount / 100;
@@ -78,7 +79,9 @@ const oneTime = response.data.pricing[1].unit_amount / 100;
             </div>
           </div>
           <section class="w-full">
-            <span class="p-4 text-white text-2xl">{`${oneTime.toString()}€` || "Nedostupné"}</span>
+            <span class="p-4 text-white text-2xl"
+              >{`${oneTime.toString()}€` || "Nedostupné"}</span
+            >
             <a
               href="https://client.kryptokurz.sk/register"
               class="text-white bg-kryptokurz-green flex items-center mt-3 justify-center w-full h-10 rounded"
@@ -141,7 +144,9 @@ const oneTime = response.data.pricing[1].unit_amount / 100;
             </div>
           </div>
           <section class="w-full">
-            <span class="p-4 text-white text-2xl">{`${monthly.toString()}€/mes.` || "Nedostupné"}</span>
+            <span class="p-4 text-white text-2xl"
+              >{`${monthly.toString()}€/mes.` || "Nedostupné"}</span
+            >
             <a
               href="https://client.kryptokurz.sk/register"
               class="text-white bg-kryptokurz-green flex items-center mt-3 justify-center w-full h-10 rounded"
