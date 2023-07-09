@@ -1,6 +1,13 @@
 ---
+import axios from "axios";
 import CenteredContentLayout from "../layouts/CenteredContentLayout.astro";
 import Layout from "../layouts/Layout.astro";
+const timestamp = Date.now();
+const response = await axios.get(
+  `${import.meta.env.PUBLIC_SERVER_URL}/stripe/products?timestamp=${timestamp}`
+);
+const monthly = response.data.pricing[0].unit_amount / 100;
+const oneTime = response.data.pricing[1].unit_amount / 100;
 ---
 
 <Layout title="Cenník">
@@ -73,7 +80,7 @@ import Layout from "../layouts/Layout.astro";
           </div>
           <section class="w-full">
             <span id="onetime" class="p-4 text-white text-2xl"
-              >One Time Pricing</span
+              >{oneTime}€</span
             >
             <a
               href="https://client.kryptokurz.sk/register"
@@ -138,7 +145,7 @@ import Layout from "../layouts/Layout.astro";
           </div>
           <section class="w-full">
             <span id="subscription" class="p-4 text-white text-2xl"
-              >Subscription pricing</span
+              >{monthly}/mesiac €</span
             >
             <a
               href="https://client.kryptokurz.sk/register"
@@ -149,30 +156,5 @@ import Layout from "../layouts/Layout.astro";
         </section>
       </article>
     </div>
-    <script>
-      import axios from "axios";
-      const timestamp = Date.now();
-      const response = await axios.get(
-        `${
-          import.meta.env.PUBLIC_SERVER_URL
-        }/stripe/products?timestamp=${timestamp}`,
-        {
-          headers: {
-            "Cache-Control": "no-cache",
-            Pragma: "no-cache",
-            "If-Modified-Since": "0",
-          },
-        }
-      );
-      const monthly = response.data.pricing[0].unit_amount / 100 || 500;
-      const oneTime = response.data.pricing[1].unit_amount / 100 || 500; 
-
-      const one = (document.getElementById(
-        "onetime"
-      ).innerHTML = `${oneTime}/mesiac €`);
-      const sub = (document.getElementById(
-        "subscription"
-      ).innerHTML = `${monthly}/mesiac €`);
-    </script>
   </CenteredContentLayout>
 </Layout>
