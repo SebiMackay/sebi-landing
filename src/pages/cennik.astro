@@ -4,12 +4,20 @@ import CenteredContentLayout from "../layouts/CenteredContentLayout.astro";
 import Layout from "../layouts/Layout.astro";
 const timestamp = Date.now();
 const response = await axios.get(
-  `${import.meta.env.PUBLIC_SERVER_URL}/stripe/products?timestamp=${timestamp}`
+  `${import.meta.env.PUBLIC_SERVER_URL}/stripe/products?timestamp=${timestamp}`,
+  {
+    headers: {
+      "Cache-Control": "no-cache",
+      Pragma: "no-cache",
+      "If-Modified-Since": "0",
+    },
+  }
 );
 const monthly = response.data.pricing[0].unit_amount / 100;
 const oneTime = response.data.pricing[1].unit_amount / 100;
 ---
 
+}
 <Layout title="Cenník">
   <CenteredContentLayout>
     <div class="w-full md:w-2/3 text-center">
