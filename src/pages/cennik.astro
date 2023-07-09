@@ -1,23 +1,8 @@
 ---
-import axios from "axios";
 import CenteredContentLayout from "../layouts/CenteredContentLayout.astro";
 import Layout from "../layouts/Layout.astro";
-const timestamp = Date.now();
-const response = await axios.get(
-  `${import.meta.env.PUBLIC_SERVER_URL}/stripe/products?timestamp=${timestamp}`,
-  {
-    headers: {
-      "Cache-Control": "no-cache",
-      Pragma: "no-cache",
-      "If-Modified-Since": "0",
-    },
-  }
-);
-const monthly = response.data.pricing[0].unit_amount / 100;
-const oneTime = response.data.pricing[1].unit_amount / 100;
 ---
 
-}
 <Layout title="Cenník">
   <CenteredContentLayout>
     <div class="w-full md:w-2/3 text-center">
@@ -87,8 +72,8 @@ const oneTime = response.data.pricing[1].unit_amount / 100;
             </div>
           </div>
           <section class="w-full">
-            <span class="p-4 text-white text-2xl"
-              >{`${oneTime.toString()}€` || "Nedostupné"}</span
+            <span id="onetime" class="p-4 text-white text-2xl"
+              >One Time Pricing</span
             >
             <a
               href="https://client.kryptokurz.sk/register"
@@ -152,8 +137,8 @@ const oneTime = response.data.pricing[1].unit_amount / 100;
             </div>
           </div>
           <section class="w-full">
-            <span class="p-4 text-white text-2xl"
-              >{`${monthly.toString()}€/mes.` || "Nedostupné"}</span
+            <span id="subscription" class="p-4 text-white text-2xl"
+              >Subscription pricing</span
             >
             <a
               href="https://client.kryptokurz.sk/register"
@@ -164,5 +149,30 @@ const oneTime = response.data.pricing[1].unit_amount / 100;
         </section>
       </article>
     </div>
+    <script>
+      import axios from "axios";
+      const timestamp = Date.now();
+      const response = await axios.get(
+        `${
+          import.meta.env.PUBLIC_SERVER_URL
+        }/stripe/products?timestamp=${timestamp}`,
+        {
+          headers: {
+            "Cache-Control": "no-cache",
+            Pragma: "no-cache",
+            "If-Modified-Since": "0",
+          },
+        }
+      );
+      const monthly = response.data.pricing[0].unit_amount / 100 || 500;
+      const oneTime = response.data.pricing[1].unit_amount / 100 || 500; 
+
+      const one = (document.getElementById(
+        "onetime"
+      ).innerHTML = `${oneTime}/mesiac €`);
+      const sub = (document.getElementById(
+        "subscription"
+      ).innerHTML = `${monthly}/mesiac €`);
+    </script>
   </CenteredContentLayout>
 </Layout>
