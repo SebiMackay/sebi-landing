@@ -1,6 +1,12 @@
 ---
+import axios from "axios";
 import CenteredContentLayout from "../layouts/CenteredContentLayout.astro";
 import Layout from "../layouts/Layout.astro";
+const response = await axios.get(
+  `${import.meta.env.PUBLIC_SERVER_URL}/stripe/products`
+);
+const monthly = response.data.pricing[0].unit_amount / 100;
+const oneTime = response.data.pricing[1].unit_amount / 100;
 ---
 
 <Layout title="Cenník">
@@ -20,10 +26,10 @@ import Layout from "../layouts/Layout.astro";
         a coachom pre pomoc a akékoľvek otázky, na vždy!
       </p>
       <article
-        class="py-16 lg:py-10 flex w-full h-full gap-2 gap-y-4 flex-wrap lg:flex-nowrap"
+        class="py-16 lg:py-10 flex items-center justify-center w-full h-full gap-2 gap-y-4 flex-wrap lg:flex-nowrap"
       >
         <section
-          class="w-full lg:w-[500px] h-[600px] flex flex-col items-center justify-between rounded shadow-2xl p-4"
+          class="w-full h-[600px] flex flex-col items-center justify-between rounded shadow-2xl p-4"
         >
           <div class="flex flex-col justify-center items-center">
             <svg
@@ -72,7 +78,7 @@ import Layout from "../layouts/Layout.astro";
             </div>
           </div>
           <section class="w-full">
-            <span class="p-4 text-white text-2xl">225 €</span>
+            <span class="p-4 text-white text-2xl">{`${oneTime.toString()}€` || "Nedostupné"}</span>
             <a
               href="https://client.kryptokurz.sk/register"
               class="text-white bg-kryptokurz-green flex items-center mt-3 justify-center w-full h-10 rounded"
@@ -82,7 +88,7 @@ import Layout from "../layouts/Layout.astro";
         </section>
 
         <section
-          class="w-full lg:w-[500px] h-[600px] flex flex-col items-center justify-between rounded shadow-2xl p-4"
+          class="w-full h-[600px] flex flex-col items-center justify-between rounded shadow-2xl p-4"
         >
           <div class="flex flex-col items-center">
             <svg
@@ -135,67 +141,11 @@ import Layout from "../layouts/Layout.astro";
             </div>
           </div>
           <section class="w-full">
-            <span class="p-4 text-white text-2xl">75€/mes.</span>
+            <span class="p-4 text-white text-2xl">{`${monthly.toString()}€/mes.` || "Nedostupné"}</span>
             <a
               href="https://client.kryptokurz.sk/register"
               class="text-white bg-kryptokurz-green flex items-center mt-3 justify-center w-full h-10 rounded"
               >Registrácia</a
-            >
-          </section>
-        </section>
-
-        <section
-          class="w-full lg:w-[500px] h-[600px] flex flex-col items-center justify-between rounded shadow-2xl p-4"
-        >
-          <div class="flex flex-col items-center">
-            <svg
-              class="text-kryptokurz-green w-16 h-16"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 64 64"
-              ><path
-                data-name="layer2"
-                d="M56 54H8a6 6 0 01-6-6V10h48v8"
-                fill="none"
-                stroke="currentColor"
-                stroke-miterlimit="10"
-                stroke-width="2"
-                stroke-linejoin="round"
-                stroke-linecap="round"></path><path
-                data-name="layer2"
-                d="M62 18v30a6 6 0 01-6 6 6 6 0 01-6-6V18z"
-                fill="none"
-                stroke="currentColor"
-                stroke-miterlimit="10"
-                stroke-width="2"
-                stroke-linejoin="round"
-                stroke-linecap="round"></path><path
-                data-name="layer1"
-                fill="none"
-                stroke="currentColor"
-                stroke-miterlimit="10"
-                stroke-width="2"
-                d="M10 18h32m-32 8h14v16H10zm22 0h10m-10 8h10m-10 8h10"
-                stroke-linejoin="round"
-                stroke-linecap="round"></path>
-            </svg>
-            <p class="text-kryptokurz-gray text-lg">Nedostupné</p>
-            <p class="text-white font-semibold text-3xl p-6">Krypto Noviny</p>
-            <div class="text-white text-base">
-              <p class="p-1">
-                Noviny zo sveta Krypta a DeFi každý týždeň v tvojom inboxe
-
-                <br />
-              </p>
-              <p class="p-1">Týždenná Analýza Trhu</p>
-              <p class="p-1">Prehľad Nových Kryptomien, Tokenov a Projektov</p>
-              <p class="p-1 pt-8">(Minimálna predplatná doba 1 mesiac)</p>
-            </div>
-          </div>
-          <section class="w-full">
-            <span class="p-4 text-white text-2xl">5€/Týždeň</span>
-            <a
-              class="text-white bg-kryptokurz-green flex items-center mt-3 justify-center w-full h-10 rounded"
-              >Nedostupné</a
             >
           </section>
         </section>
