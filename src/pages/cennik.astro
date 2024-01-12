@@ -76,6 +76,7 @@ import Layout from "../layouts/Layout.astro";
           <section class="w-full">
             <span id="onetime" class="p-4 text-white text-2xl"></span>
             <button
+              disabled
               id="onetime-button"
               class="text-white bg-kryptokurz-green flex items-center mt-3 justify-center w-full h-10 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
               >Registrácia</button
@@ -141,6 +142,7 @@ import Layout from "../layouts/Layout.astro";
           <section class="w-full">
             <span id="subscription" class="p-4 text-white text-2xl"></span>
             <button
+              disabled
               id="subscription-button"
               class="text-white bg-kryptokurz-green flex items-center mt-3 justify-center w-full h-10 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
               >Registrácia</button
@@ -158,14 +160,18 @@ import Layout from "../layouts/Layout.astro";
   const oneTimeButton = document.getElementById(
     "onetime-button"
   ) as HTMLButtonElement;
-  const oneTimeStatus = document.getElementById("onetime-status") as HTMLSpanElement;
+  const oneTimeStatus = document.getElementById(
+    "onetime-status"
+  ) as HTMLSpanElement;
   // subscription
   const sub = document.getElementById("subscription") as HTMLSpanElement;
   const subButton = document.getElementById(
     "subscription-button"
   ) as HTMLButtonElement;
-  const subStatus = document.getElementById("subscription-status") as HTMLSpanElement;
-  // 
+  const subStatus = document.getElementById(
+    "subscription-status"
+  ) as HTMLSpanElement;
+  //
   import axios from "axios";
   const timestamp = Date.now();
   await axios
@@ -177,6 +183,8 @@ import Layout from "../layouts/Layout.astro";
     .then((res) => {
       oneTime.innerText = `${res.data.pricing[0].unit_amount / 100}€`;
       sub.innerText = `${res.data.pricing[1].unit_amount / 100}€`;
+      oneTimeButton.disabled = false;
+      subButton.disabled = false;
     })
     .catch((err) => {
       oneTime.innerText = ``;
