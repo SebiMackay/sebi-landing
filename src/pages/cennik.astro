@@ -1,13 +1,6 @@
 ---
-import axios from "axios";
 import CenteredContentLayout from "../layouts/CenteredContentLayout.astro";
 import Layout from "../layouts/Layout.astro";
-const timestamp = Date.now();
-const response = await axios.get(
-  `${import.meta.env.PUBLIC_SERVER_URL}/stripe/products?timestamp=${timestamp}`
-);
-const monthly = response.data.pricing[0].unit_amount / 100;
-const oneTime = response.data.pricing[1].unit_amount / 100;
 ---
 
 <Layout title="Cenník">
@@ -63,7 +56,9 @@ const oneTime = response.data.pricing[1].unit_amount / 100;
                 stroke-linejoin="round"
                 stroke-linecap="round"></path>
             </svg>
-            <p class="text-kryptokurz-gray text-lg">Dostupné</p>
+            <p id="onetime-status" class="text-kryptokurz-gray text-lg">
+              Dostupné
+            </p>
             <p class="text-white font-semibold text-3xl p-6">Kryptokurz</p>
             <div class="text-white text-base">
               <p class="p-1">
@@ -79,13 +74,11 @@ const oneTime = response.data.pricing[1].unit_amount / 100;
             </div>
           </div>
           <section class="w-full">
-            <span id="onetime" class="p-4 text-white text-2xl"
-              >{oneTime} €</span
-            >
-            <a
-              href="https://client.kryptokurz.sk/register"
-              class="text-white bg-kryptokurz-green flex items-center mt-3 justify-center w-full h-10 rounded"
-              >Registrácia</a
+            <span id="onetime" class="p-4 text-white text-2xl"></span>
+            <button
+              id="onetime-button"
+              class="text-white bg-kryptokurz-green flex items-center mt-3 justify-center w-full h-10 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
+              >Registrácia</button
             >
           </section>
         </section>
@@ -124,7 +117,9 @@ const oneTime = response.data.pricing[1].unit_amount / 100;
                 stroke-linejoin="round"
                 stroke-linecap="round"></path>
             </svg>
-            <p class="text-kryptokurz-gray text-lg">Dostupné</p>
+            <p id="subscription-status" class="text-kryptokurz-gray text-lg">
+              Dostupné
+            </p>
             <p class="text-white font-semibold text-3xl p-6">Kryptokurz</p>
             <div class="text-white text-base">
               <p class="p-1">
@@ -144,13 +139,11 @@ const oneTime = response.data.pricing[1].unit_amount / 100;
             </div>
           </div>
           <section class="w-full">
-            <span id="subscription" class="p-4 text-white text-2xl"
-              >{monthly}/mesiac €</span
-            >
-            <a
-              href="https://client.kryptokurz.sk/register"
-              class="text-white bg-kryptokurz-green flex items-center mt-3 justify-center w-full h-10 rounded"
-              >Registrácia</a
+            <span id="subscription" class="p-4 text-white text-2xl"></span>
+            <button
+              id="subscription-button"
+              class="text-white bg-kryptokurz-green flex items-center mt-3 justify-center w-full h-10 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
+              >Registrácia</button
             >
           </section>
         </section>
@@ -158,3 +151,46 @@ const oneTime = response.data.pricing[1].unit_amount / 100;
     </div>
   </CenteredContentLayout>
 </Layout>
+
+<script>
+  // one time
+  const oneTime = document.getElementById("onetime") as HTMLSpanElement;
+  const oneTimeButton = document.getElementById(
+    "onetime-button"
+  ) as HTMLButtonElement;
+  const oneTimeStatus = document.getElementById("onetime-status") as HTMLSpanElement;
+  // subscription
+  const sub = document.getElementById("subscription") as HTMLSpanElement;
+  const subButton = document.getElementById(
+    "subscription-button"
+  ) as HTMLButtonElement;
+  const subStatus = document.getElementById("subscription-status") as HTMLSpanElement;
+  // 
+  import axios from "axios";
+  const timestamp = Date.now();
+  await axios
+    .get(
+      `${
+        import.meta.env.PUBLIC_SERVER_URL
+      }/stripe/products?timestamp=${timestamp}`
+    )
+    .then((res) => {
+      oneTime.innerText = `${res.data.pricing[0].unit_amount / 100}€`;
+      sub.innerText = `${res.data.pricing[1].unit_amount / 100}€`;
+    })
+    .catch((err) => {
+      oneTime.innerText = ``;
+      sub.innerText = ``;
+      oneTimeButton.disabled = true;
+      subButton.disabled = true;
+      oneTimeStatus.innerText = `Nedostupné`;
+      subStatus.innerText = `Nedostupné`;
+    });
+
+  function redirectToClient() {
+    window.location.href = `https://www.client.kryptokurz.sk/register`;
+  }
+  // assign redirect to buttons
+  oneTimeButton.onclick = redirectToClient;
+  subButton.onclick = redirectToClient;
+</script>
