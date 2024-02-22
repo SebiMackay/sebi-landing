@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { inject } from "@vercel/analytics";
 
+
 function CookieBanner() {
   const [open, setOpen] = useState(false);
 
@@ -9,6 +10,18 @@ function CookieBanner() {
     gaScript.async = true;
     gaScript.src = "https://www.googletagmanager.com/gtag/js?id=UA-227185768-1";
     document.body.appendChild(gaScript);
+    gaScript.onload = () => {
+      // Initialize Google Analytics once the script is loaded
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-227185768-1");
+
+      // Trigger a pageview
+      gtag("event", "pageview");
+    };
   };
 
   const injectAnalytics = () => {
@@ -27,9 +40,8 @@ function CookieBanner() {
   }, []);
   return (
     <section
-      className={`${
-        open ? "visible" : "hidden"
-      } w-full min-h-14 bg-kryptokurz-cookie-banner text-xs whitespace-pre-line text-white p-4 flex flex-wrap lg:flex-nowrap  items-center
+      className={`${open ? "visible" : "hidden"
+        } w-full min-h-14 bg-kryptokurz-cookie-banner text-xs whitespace-pre-line text-white p-4 flex flex-wrap lg:flex-nowrap  items-center
         justify-between
         `}
     >
